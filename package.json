@@ -1,15 +1,22 @@
 {
-  "name": "lamegame",
+  "name": "road-fighter",
   "version": "1.0.0",
   "description": "",
   "private": true,
   "scripts": {
     "start": "webpack serve --mode development"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "road fighter",
+    "NES",
+    "video game",
+    "html5 canvas"
+  ],
+  "author": "Pranav Gupta",
+  "license": "MIT",
   "devDependencies": {
+    "css-loader": "^5.0.1",
+    "style-loader": "^2.0.0",
     "ts-loader": "^8.0.11",
     "typescript": "^4.0.5",
     "webpack": "^5.4.0",

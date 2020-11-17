@@ -1,11 +1,7 @@
+import Game from './components/Game';
 
-function component() {
-  const element = document.createElement('div');
+let gameArea:HTMLCanvasElement = document.querySelector("#gameArea");
 
-  console.log('fasdffdfas')
-  element.innerHTML = "fdafad";
+let game:Game = new Game(gameArea);
 
-  return element;
-}
-
-document.body.appendChild(component());
+game.run();
