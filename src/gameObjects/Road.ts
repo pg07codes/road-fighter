@@ -25,6 +25,10 @@ export default class Road {
         })
     }
 
+    public getDimensions():Dimensions{
+        return this.dimensions;
+    }
+    
     public draw() {
         this.ctx.fillStyle = "#000";
         this.ctx.fillRect(this.dimensions.posX, this.dimensions.posY, this.dimensions.width, this.dimensions.height);

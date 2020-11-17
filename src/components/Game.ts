@@ -1,6 +1,7 @@
 import Road from '../gameObjects/Road';
 import { Dimensions } from '../types';
-import './../css/globalStyles.css'
+import './../css/globalStyles.css';
+import Car from '../gameObjects/Car';
 
 export default class Game{
 
@@ -10,6 +11,7 @@ export default class Game{
     private lastRenderTime:DOMHighResTimeStamp;
     private gameDimensions:Dimensions;
     private road:Road;
+    private car:Car;
     
     constructor(gameArea:HTMLCanvasElement){
         this.gameAreaCanvasElement = gameArea;
@@ -20,21 +22,27 @@ export default class Game{
             width: 800,
             height:600
         };
-        this.road = new Road(this.ctx,this.gameDimensions);
+        
     }
 
     private initialize():void{
         this.gameAreaCanvasElement.width = this.gameDimensions.width;
         this.gameAreaCanvasElement.height = this.gameDimensions.height;
+
+        this.road = new Road(this.ctx,this.gameDimensions);
+        this.car = new Car(this.ctx,this.road.getDimensions());
+        this.car.initialiseInputHandler();
+
     }
-    private num =0;
+
     private gameLoop(currentTime:DOMHighResTimeStamp):void{
         let delta = currentTime - this.lastRenderTime;
         this.lastRenderTime = currentTime;
 
         // draw 
         this.road.draw();
-        this.road.drawStrips()
+        this.road.drawStrips();
+        this.car.draw();
 
         //update
         this.road.updateStrips();

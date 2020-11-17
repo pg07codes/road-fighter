@@ -5,3 +5,8 @@ export type Dimensions = {
     height:number,
     width:number
 }
+
+export enum Direction {
+    left,
+    right
+}
