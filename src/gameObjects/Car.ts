@@ -18,7 +18,7 @@ export default class Car {
     }
 
     public draw(): void {
-        this.ctx.fillStyle = "#f00";
+        this.ctx.fillStyle = "#0f0";
         this.ctx.fillRect(this.dimensions.posX, this.dimensions.posY, this.dimensions.width, this.dimensions.height);
     }
 

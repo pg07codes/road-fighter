@@ -2,6 +2,8 @@ import Road from '../gameObjects/Road';
 import { Dimensions } from '../types';
 import './../css/globalStyles.css';
 import Car from '../gameObjects/Car';
+import EnemyCar from '../gameObjects/EnemyCar';
+import EnemyCarFactory from './EnemyCarFactory';
 
 export default class Game{
 
@@ -12,6 +14,7 @@ export default class Game{
     private gameDimensions:Dimensions;
     private road:Road;
     private car:Car;
+    private enemyCarFactory:EnemyCarFactory;
     
     constructor(gameArea:HTMLCanvasElement){
         this.gameAreaCanvasElement = gameArea;
@@ -30,9 +33,10 @@ export default class Game{
         this.gameAreaCanvasElement.height = this.gameDimensions.height;
 
         this.road = new Road(this.ctx,this.gameDimensions);
+        
         this.car = new Car(this.ctx,this.road.getDimensions());
         this.car.initialiseInputHandler();
-
+        this.enemyCarFactory = new EnemyCarFactory(this.ctx,this.road.getDimensions());
     }
 
     private gameLoop(currentTime:DOMHighResTimeStamp):void{
@@ -41,11 +45,14 @@ export default class Game{
 
         // draw 
         this.road.draw();
-        this.road.drawStrips();
+        this.road.drawStrips();  // this is implicit part of the road, so shouldnt be called seperately.
+        
         this.car.draw();
+        this.enemyCarFactory.draw();
 
         //update
-        this.road.updateStrips();
+        this.road.updateStrips(); // no need to be called. it should be inherent prop of road.
+        this.enemyCarFactory.updatePosition();
 
         requestAnimationFrame(this.gameLoop.bind(this));
     }
