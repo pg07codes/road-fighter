@@ -1,5 +1,6 @@
 import { Dimensions, Direction } from './../types';
 import carPNG from './../images/car.png';
+import carOnEdgeMP3 from './../sounds/carOnEdge.mp3'
 
 export default class Car {
 
@@ -9,6 +10,7 @@ export default class Car {
     private velocity:number;
     private maxSpeed:number;
     private carImage;
+    private carOnEdge;
 
     constructor(ctx:CanvasRenderingContext2D, roadDimensions: Dimensions) {
         this.roadDimensions = roadDimensions;
@@ -24,6 +26,8 @@ export default class Car {
 
         this.carImage = new Image();
         this.carImage.src=carPNG;
+
+        this.carOnEdge = new Audio(carOnEdgeMP3);
         
     }
 
@@ -45,12 +49,37 @@ export default class Car {
             }
         }
 
-        if(this.velocity>0){  
-            if(this.dimensions.posX + this.dimensions.width < this.roadDimensions.posX + this.roadDimensions.width ){
+        if(this.velocity>0){  // added 3 as it was overlapping on grass edge on right side which did not seem clean
+            if(this.dimensions.posX + this.dimensions.width+3 < this.roadDimensions.posX + this.roadDimensions.width ){
                 this.dimensions.posX +=this.velocity;
             }
         }
+
+        if(this.isCarOnEdge()){
+            this.carOnEdge.play();
+        }else{
+            console.log('na')
+        }
             
+    }
+
+    private isCarOnEdge():boolean{
+
+        if(this.numberCloseEnough(this.dimensions.posX,this.roadDimensions.posX) || 
+        this.numberCloseEnough(this.dimensions.posX+this.dimensions.width,this.roadDimensions.posX+this.roadDimensions.width)){
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * used to approximately check if pixels are close enough as they are not accurate enough to be used with ==
+     */
+    private numberCloseEnough(a:number,b:number):boolean{
+        if(Math.abs(a-b)<4){
+            return true;
+        }
+        return false;
     }
 
     public initialiseInputHandler():void{

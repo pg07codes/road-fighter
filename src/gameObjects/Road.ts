@@ -5,7 +5,7 @@ export default class Road {
     private dimensions: Dimensions;
     private ctx: CanvasRenderingContext2D;
     private Stripes: Dimensions[];
-    private stripeCount =6;
+    private stripeCount = 7 ;
 
     constructor(ctx: CanvasRenderingContext2D, gameDimensions: Dimensions) {
 
@@ -54,7 +54,7 @@ export default class Road {
             if(i.posY>this.dimensions.height) 
                 i.posY=0;
             else
-                i.posY += 5;
+                i.posY += 8;
         })
     }
 

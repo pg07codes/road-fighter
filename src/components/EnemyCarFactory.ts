@@ -3,6 +3,7 @@ import EnemyCar from "../gameObjects/EnemyCar";
 import { Dimensions, Position } from "../types";
 import enemyCarPNG from './../images/enemyCar.png'
 
+
 export default class EnemyCarFactory {
 
     private carCount: number;

@@ -9,5 +9,12 @@ html, body{
     border: black solid 1px;
     margin: 0 auto;
     display: block;
-    background-color: aqua;
+    background: #4b8833;
+}
+
+#instructions{
+    width: 600px;
+    margin: 10px auto;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

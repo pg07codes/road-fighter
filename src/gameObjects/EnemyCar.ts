@@ -17,7 +17,9 @@ export default class EnemyCar{
             width: 45
         };
         this.ctx = ctx;
-        this.speed=6;
+        this.speed=10;
+
     }
+
     
 }
