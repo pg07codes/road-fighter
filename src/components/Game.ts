@@ -23,12 +23,12 @@ export default class Game{
         this.ctx = gameArea.getContext("2d");
         this.lastRenderTime = 0;
         this.gameDimensions = {
-            width: 800,
-            height:600
+            width: 1080,
+            height:720
         };
 
-        this.gameAreaCanvasElement.width = 800;
-        this.gameAreaCanvasElement.height = 600;
+        this.gameAreaCanvasElement.width = 1080;
+        this.gameAreaCanvasElement.height = 720;
 
         this.isGameInitialized=false;
         this.isRunning = false;
@@ -52,14 +52,15 @@ export default class Game{
 
         // draw 
         this.road.draw();
-        this.road.drawStrips();  // this is implicit part of the road, so shouldnt be called seperately.
+        this.road.drawStripes();  // this is implicit part of the road, so shouldnt be called seperately.
         
         this.car.draw();
         this.enemyCarFactory.draw();
 
         //update
-        this.road.updateStrips(); // no need to be called. it should be inherent prop of road.
+        this.road.updateStripes(); // no need to be called. it should be inherent prop of road.
         this.enemyCarFactory.updatePosition();
+        this.car.updatePosition();
 
 
         if(this.enemyCarFactory.detectCollision()){

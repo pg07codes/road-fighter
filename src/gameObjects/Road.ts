@@ -4,7 +4,8 @@ export default class Road {
 
     private dimensions: Dimensions;
     private ctx: CanvasRenderingContext2D;
-    private Strips: Dimensions[];
+    private Stripes: Dimensions[];
+    private stripeCount =6;
 
     constructor(ctx: CanvasRenderingContext2D, gameDimensions: Dimensions) {
 
@@ -15,12 +16,12 @@ export default class Road {
             posX: 0.25 * gameDimensions.width,
             posY: 0
         };
-        this.Strips = [...Array(5)].map((_, idx): Dimensions => {
+        this.Stripes = [...Array(this.stripeCount)].map((_, idx): Dimensions => {
             return {
-                height: gameDimensions.height/6,
+                height: gameDimensions.height/(this.stripeCount+1),
                 width: 10,
-                posX:gameDimensions.width/2 - 5,
-                posY: idx*(gameDimensions.height/5)
+                posX:gameDimensions.width/2 - this.stripeCount,
+                posY: idx*(gameDimensions.height/this.stripeCount)
             };
         })
     }
@@ -34,11 +35,11 @@ export default class Road {
         this.ctx.fillRect(this.dimensions.posX, this.dimensions.posY, this.dimensions.width, this.dimensions.height);
     }
 
-    public drawStrips() {
+    public drawStripes() {
 
         this.ctx.fillStyle = "#fff";
 
-        this.Strips.forEach((i) => {
+        this.Stripes.forEach((i) => {
             this.ctx.fillRect(
                 i.posX,
                 i.posY,
@@ -48,8 +49,8 @@ export default class Road {
 
     }
 
-    public updateStrips() {
-        this.Strips.forEach(i=>{
+    public updateStripes() {
+        this.Stripes.forEach(i=>{
             if(i.posY>this.dimensions.height) 
                 i.posY=0;
             else

@@ -13,6 +13,10 @@ module.exports = {
             test: /\.css$/i,
             use: ['style-loader', 'css-loader'],
             exclude: /node_modules/
+        },{
+            test: /\.(png|jpg|jpeg)$/i,
+            use: 'file-loader',
+            exclude: /node_modules/ 
         }]
     },
     resolve: { // not used currently. no `.js` used.
