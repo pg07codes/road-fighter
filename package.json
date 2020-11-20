@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "start": "webpack serve --mode development"
+    "dev": "webpack serve --mode development"
   },
   "keywords": [
     "road fighter",
