@@ -1,7 +1,8 @@
-import { Dimensions, Direction } from "../types";
+import { Dimensions} from "../types";
 import { ctx } from "./../index";
 import carPNG from "./../images/car.png";
 import carOnEdgeMP3 from "./../sounds/carOnEdge.mp3";
+import constants from "../constants";
 
 export default class Car {
     private ctx;
@@ -14,15 +15,13 @@ export default class Car {
     private carOnEdgeAudio;
 
     constructor(maxSpeed: number, roadDimensions: Dimensions) {
-        let carWidth = 40;
-        let carHeight = 70;
 
         this.roadDimensions = roadDimensions;
         this.dimensions = {
-            posX: roadDimensions.posX + roadDimensions.width / 2 - carWidth / 2,
-            posY: roadDimensions.height - carHeight - 50,
-            height: carHeight,
-            width: carWidth,
+            posX: roadDimensions.posX + roadDimensions.width / 2 - constants.CAR_WIDTH / 2,
+            posY: roadDimensions.height - constants.CAR_HEIGHT - 50,
+            height: constants.CAR_HEIGHT,
+            width: constants.CAR_WIDTH,
         };
         this.ctx = ctx;
         this.speed = 5;
@@ -50,6 +49,7 @@ export default class Car {
 
     public draw(): void {
         this.ctx.fillStyle = "#0f0";
+        this.ctx.fillRect(this.dimensions.posX, this.dimensions.posY, this.dimensions.width, this.dimensions.height)
         this.ctx.drawImage(this.carImage, this.dimensions.posX, this.dimensions.posY);
     }
 

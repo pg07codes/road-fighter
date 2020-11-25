@@ -2,7 +2,7 @@ import Road from "./Road";
 import { Dimensions } from "../types";
 import "./../css/globalStyles.css";
 import Car from "./Car";
-import EnemyCarManager from "./EnemyCarManager";
+import EnemyVehicleManager from "./EnemyVehicleManager"; // here was one difference
 import carCrashMP3 from "./../sounds/carCrash.mp3";
 import grassSpritePNG from "./../sprites/grass.png";
 
@@ -12,7 +12,7 @@ export default class Game {
     private lastRenderTime: DOMHighResTimeStamp;
     private road: Road;
     private car: Car;
-    private enemyCarManager: EnemyCarManager;
+    private enemyVehicleManager: EnemyVehicleManager;
     private carCrashAudio;
     private grassSprite;
 
@@ -32,9 +32,9 @@ export default class Game {
 
     private initialize(): void {
         this.isGameInitialized = true;
-        this.road = new Road(); 
+        this.road = new Road();
         this.car = new Car(3, this.road.getDimensions());
-        this.enemyCarManager = new EnemyCarManager(this.road.getDimensions(), this.car);
+        this.enemyVehicleManager = new EnemyVehicleManager(this.road.getDimensions(), this.car);
 
         // creating background from grass sprites
         let pattern = this.ctx.createPattern(this.grassSprite, "repeat");
@@ -51,14 +51,14 @@ export default class Game {
         this.road.draw();
 
         this.car.draw();
-        this.enemyCarManager.draw();
+        this.enemyVehicleManager.draw();
 
         //update
         this.road.update();
-        this.enemyCarManager.updatePosition();
+        this.enemyVehicleManager.updatePosition();
         this.car.updatePosition();
 
-        if (this.enemyCarManager.detectCollision()) {
+        if (this.enemyVehicleManager.detectCollision()) {
             this.carCrashAudio.play();
             this.isGameInitialized = false;
             this.isRunning = false;

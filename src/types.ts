@@ -5,9 +5,9 @@ export type Dimensions = {
     width: number;
 };
 
-export enum Direction {
-    left,
-    right,
+export enum VehicleType {
+    car,
+    truck,
 }
 
 export type Position = {
