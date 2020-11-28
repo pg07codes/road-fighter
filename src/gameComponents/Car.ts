@@ -49,14 +49,12 @@ export default class Car {
 
     public updatePosition() {
         if (this.steerSpeed < 0) {
-            console.log('leftperp')
             if (this.dimensions.posX > this.roadDimensions.posX) {
                 this.dimensions.posX += this.steerSpeed;
             }
         }
 
         if (this.steerSpeed > 0) {
-            console.log('rightperp')
             if (this.dimensions.posX + this.dimensions.width + 3 * this.steerSpeed < this.roadDimensions.posX + this.roadDimensions.width) {
                 this.dimensions.posX += this.steerSpeed;
             }
@@ -114,20 +112,28 @@ export default class Car {
             let $leftSteer = document.querySelector("#leftSteer");
             let $rightSteer = document.querySelector("#rightSteer");
 
+            $leftSteer.addEventListener("touchstart", (_) => {
+                this.steerSpeed = -this.maxSteerSpeed;
+            });
+            $leftSteer.addEventListener("touchend", (_) => {
+                this.steerSpeed = 0;
+            });
             $leftSteer.addEventListener("mousedown", (_) => {
                 this.steerSpeed = -this.maxSteerSpeed;
-                console.log('left',this.steerSpeed);
+            });
+            $leftSteer.addEventListener("mouseup", (_) => {
+                this.steerSpeed = 0;
             });
 
+            $rightSteer.addEventListener("touchstart", (_) => {
+                this.steerSpeed = this.maxSteerSpeed;
+            });
+            $rightSteer.addEventListener("touchend", (_) => {
+                this.steerSpeed = 0;
+            });
             $rightSteer.addEventListener("mousedown", (_) => {
                 this.steerSpeed = this.maxSteerSpeed;
             });
-
-            $leftSteer.addEventListener("mouseup", (_) => {
-                this.steerSpeed = 0;
-                console.log('leftup',this.steerSpeed);
-            });
-
             $rightSteer.addEventListener("mouseup", (_) => {
                 this.steerSpeed = 0;
             });

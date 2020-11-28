@@ -4,6 +4,7 @@ import EnemyVehicleManager from "./EnemyVehicleManager"; // here was one differe
 import carCrashMP3 from "./../sounds/carCrash.mp3";
 import grassSpritePNG from "./../sprites/grass.png";
 import constants from "../constants";
+import { playPauseElement, onMobile } from "./../index";
 
 export default class Game {
     private gameArea;
@@ -58,6 +59,7 @@ export default class Game {
         this.car.updatePosition();
 
         if (this.enemyVehicleManager.detectCollision()) {
+            if (onMobile) playPauseElement.className = "icon-play";
             this.carCrashAudio.play();
             this.isGameInitialized = false;
             this.isRunning = false;
