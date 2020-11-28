@@ -12,7 +12,7 @@ if (onMobile) {
 
 let gameArea: HTMLCanvasElement = document.querySelector("#gameArea");
 gameArea.width = onMobile ? window.innerWidth : 800;
-gameArea.height = onMobile ? window.innerHeight/1.1 : 600;
+gameArea.height = onMobile ? window.innerHeight / 1.1 : 600;
 
 let gameAreaDimensions: Dimensions = {
     width: gameArea.width,
@@ -37,6 +37,19 @@ document.addEventListener("keydown", (e) => {
             beep.play();
             game.pause();
         }
+    }
+});
+
+document.getElementById("playpause").addEventListener("click", (_) => {
+    if (!game.isGameInitialized) {
+        beep.play();
+        game.run();
+    } else if (!game.isRunning) {
+        beep.play();
+        game.continue();
+    } else {
+        beep.play();
+        game.pause();
     }
 });
 
