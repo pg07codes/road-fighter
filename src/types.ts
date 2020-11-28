@@ -8,6 +8,7 @@ export type Dimensions = {
 export enum VehicleType {
     car,
     truck,
+    raceCar
 }
 
 export type Position = {

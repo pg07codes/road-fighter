@@ -1,10 +1,9 @@
 import Road from "./Road";
-import { Dimensions } from "../types";
-import "./../css/globalStyles.css";
 import Car from "./Car";
 import EnemyVehicleManager from "./EnemyVehicleManager"; // here was one difference
 import carCrashMP3 from "./../sounds/carCrash.mp3";
 import grassSpritePNG from "./../sprites/grass.png";
+import constants from "../constants";
 
 export default class Game {
     private gameArea;
@@ -33,7 +32,7 @@ export default class Game {
     private initialize(): void {
         this.isGameInitialized = true;
         this.road = new Road();
-        this.car = new Car(3, this.road.getDimensions());
+        this.car = new Car(constants.MAX_STEER_SPEED, this.road.getDimensions());
         this.enemyVehicleManager = new EnemyVehicleManager(this.road.getDimensions(), this.car);
 
         // creating background from grass sprites

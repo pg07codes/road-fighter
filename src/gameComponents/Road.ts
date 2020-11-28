@@ -1,7 +1,6 @@
 import constants from "../constants";
 import { Dimensions } from "../types";
-import { ctx, gameAreaDimensions } from "../index";
-import Car from "./Car";
+import { ctx, gameAreaDimensions, onMobile } from "../index";
 
 export default class Road {
     private dimensions: Dimensions;
@@ -11,18 +10,23 @@ export default class Road {
 
     constructor() {
         this.ctx = ctx;
+
+        let roadWidth = onMobile ? gameAreaDimensions.width / 1.5 : gameAreaDimensions.width / 2;
+        let roadPosX = 0.25 * gameAreaDimensions.width; // to align road in screen center - na ji naa this not center
+
         this.dimensions = {
             height: gameAreaDimensions.height,
-            width: gameAreaDimensions.width / 2,
-            posX: 0.25 * gameAreaDimensions.width,
+            width: roadWidth,
+            posX: roadPosX,
             posY: 0,
         };
+
         this.stripes = [...Array(this.stripeCount)].map(
             (_, idx): Dimensions => {
                 return {
                     height: gameAreaDimensions.height / (this.stripeCount + 1),
                     width: 10,
-                    posX: gameAreaDimensions.width / 2 - this.stripeCount,
+                    posX: roadPosX + roadWidth / 2 - 10 / 2,
                     posY: idx * (gameAreaDimensions.height / this.stripeCount),
                 };
             }
@@ -39,7 +43,7 @@ export default class Road {
     }
 
     private drawRoad() {
-        this.ctx.fillStyle = "#000";
+        this.ctx.fillStyle = "#464647";
         this.ctx.fillRect(this.dimensions.posX, this.dimensions.posY, this.dimensions.width, this.dimensions.height);
     }
 
@@ -52,7 +56,6 @@ export default class Road {
     }
 
     public update() {
-        
         let rh = this.dimensions.height; // roadHeight
         this.stripes.forEach((i) => {
             if (i.posY > rh - rh / Math.pow(this.stripeCount, 2)) {

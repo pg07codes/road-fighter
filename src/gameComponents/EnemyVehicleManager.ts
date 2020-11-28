@@ -3,13 +3,13 @@ import { Dimensions, Position, VehicleType } from "../types";
 import { ctx } from "../index";
 import constants from "../constants";
 import EnemyVehicleFactory from "./EnemyVehicleFactory";
-import EnemyVehicle from "./EnemyVehicle";
+import IEnemyVehicle from "./IEnemyVehicle";
 
 export default class EnemyVehicleManager {
-    private enemyVehicles: EnemyVehicle[];
+    private enemyVehicles: IEnemyVehicle[];
     private roadDimensions;
     private ctx;
-    private latestEnemyVehicle: EnemyVehicle;
+    private latestEnemyVehicle: IEnemyVehicle;
     private car: Car;
     private enemyVehicleFactory: EnemyVehicleFactory;
 
@@ -17,9 +17,9 @@ export default class EnemyVehicleManager {
         this.roadDimensions = roadDimensions;
         this.car = car;
         this.ctx = ctx;
-        this.enemyVehicleFactory = new EnemyVehicleFactory(roadDimensions);
+        this.enemyVehicleFactory = new EnemyVehicleFactory(roadDimensions,car);
 
-        let enemyVehicle: EnemyVehicle = this.enemyVehicleFactory.createVehicle(VehicleType.car, constants.ENEMY_CAR_SPEED);
+        let enemyVehicle: IEnemyVehicle = this.enemyVehicleFactory.createVehicle(VehicleType.car, constants.ENEMY_CAR_SPEED);
         this.latestEnemyVehicle = enemyVehicle;
         this.enemyVehicles = [enemyVehicle];
     }
@@ -27,12 +27,16 @@ export default class EnemyVehicleManager {
     private insertNewEnemyVehicle(): void {
         if (this.latestEnemyVehicle.dimensions.posY > 0.25 * this.roadDimensions.height) {
             if (Math.round(Math.random() * 100) <= 10) {
-                if (true || Math.round(Math.random() * 1000) <= 50) {
-                    let enemyTruck: EnemyVehicle = this.enemyVehicleFactory.createVehicle(VehicleType.truck, constants.ENEMY_CAR_SPEED);
+                if (Math.round(Math.random() * 1000) <= 200) {
+                    let enemyTruck: IEnemyVehicle = this.enemyVehicleFactory.createVehicle(VehicleType.truck, constants.ENEMY_CAR_SPEED);
                     this.latestEnemyVehicle = enemyTruck;
                     this.enemyVehicles.push(enemyTruck);
+                } else if(Math.round(Math.random() * 1000) >= 900){
+                    let enemyRaceCar: IEnemyVehicle = this.enemyVehicleFactory.createVehicle(VehicleType.raceCar,constants.RACE_CAR_SPEED);
+                    this.latestEnemyVehicle = enemyRaceCar;
+                    this.enemyVehicles.push(enemyRaceCar);
                 } else {
-                    let enemyCar: EnemyVehicle = this.enemyVehicleFactory.createVehicle(VehicleType.car, constants.ENEMY_CAR_SPEED);
+                    let enemyCar: IEnemyVehicle = this.enemyVehicleFactory.createVehicle(VehicleType.car, constants.ENEMY_CAR_SPEED);
                     this.latestEnemyVehicle = enemyCar;
                     this.enemyVehicles.push(enemyCar);
                 }
@@ -59,7 +63,7 @@ export default class EnemyVehicleManager {
     public draw() {
         this.ctx.fillStyle = "#f00";
         this.enemyVehicles.forEach((i) => {
-            this.ctx.fillRect(i.dimensions.posX, i.dimensions.posY, i.dimensions.width, i.dimensions.height);
+            // this.ctx.fillRect(i.dimensions.posX, i.dimensions.posY, i.dimensions.width, i.dimensions.height);
             this.ctx.drawImage(i.img, i.dimensions.posX, i.dimensions.posY);
         });
     }
@@ -68,7 +72,7 @@ export default class EnemyVehicleManager {
 
         let carDimensions = this.car.getDimensions();
 
-        for (const i of this.enemyVehicles) {
+        for (const i of this.enemyVehicles) {  // can check only for latestEnemyVehicle(but race car usecase wont cover)
             let enemyVehicleDimensions = i.dimensions;
             
             if (

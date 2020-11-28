@@ -1,9 +1,9 @@
 import constants from "../constants";
 import { Dimensions } from "../types";
 import IEnemyVehicle from "./IEnemyVehicle";
-import enemyCarPNG from "./../images/enemyCar.png";
+import enemyRaceCarPNG from "./../images/enemyRaceCar.png";
 
-export default class EnemyCar implements IEnemyVehicle {
+export default class EnemyRaceCar implements IEnemyVehicle {
     // public fields to be used in EnemyVehicleManager
     public speed: number;
     public dimensions: Dimensions;
@@ -11,7 +11,7 @@ export default class EnemyCar implements IEnemyVehicle {
 
     constructor(roadDimensions: Dimensions, speed: number, carDimensions:Dimensions) {
         this.dimensions = {
-            posX: EnemyCar.getCarLocationBasedEnemyCarPosition(roadDimensions,carDimensions),
+            posX: EnemyRaceCar.getCarLocationBasedEnemyRaceCarPosition(roadDimensions,carDimensions),
             posY: roadDimensions.posY - constants.CAR_HEIGHT,
             height: constants.CAR_HEIGHT,
             width: constants.CAR_WIDTH,
@@ -19,13 +19,13 @@ export default class EnemyCar implements IEnemyVehicle {
 
         this.speed = speed;
         this.img = new Image();
-        this.img.src = enemyCarPNG;
+        this.img.src = enemyRaceCarPNG;
     }
 
-    private static getCarLocationBasedEnemyCarPosition(rd:Dimensions,cd:Dimensions):number{
+    private static getCarLocationBasedEnemyRaceCarPosition(rd:Dimensions,cd:Dimensions):number{
 
         let sign:number = (Math.random()*100<50)? 1 : -1;
-        let displacement = parseFloat(Math.random().toFixed(2))*0.25*rd.width;
+        let displacement = parseFloat(Math.random().toFixed(2))*0.35*rd.width;
         let centerOfCar = cd.posX + 0.5*cd.width;
 
         let posX:number = centerOfCar + sign*displacement; 

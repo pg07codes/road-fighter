@@ -1,11 +1,18 @@
+import "./css/globalStyles.css";
 import Game from "./gameComponents/Game";
 import beepMP3 from "./sounds/beep.mp3";
 import { Dimensions } from "./types";
-import constants from "./constants";
+
+let onMobile: boolean = window.innerWidth < 480 ? true : false;
+// let onMobile: boolean =true;
+
+if (onMobile) {
+    document.getElementById("mobileController").style.display = "block";
+}
 
 let gameArea: HTMLCanvasElement = document.querySelector("#gameArea");
-gameArea.width = constants.GAME_WIDTH;
-gameArea.height = constants.GAME_HEIGHT;
+gameArea.width = onMobile ? window.innerWidth : 800;
+gameArea.height = onMobile ? window.innerHeight/1.1 : 600;
 
 let gameAreaDimensions: Dimensions = {
     width: gameArea.width,
@@ -33,4 +40,4 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
-export { gameArea, gameAreaDimensions, ctx };
+export { gameArea, gameAreaDimensions, ctx, onMobile };
