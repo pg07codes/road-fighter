@@ -2,6 +2,7 @@ import "./css/globalStyles.css";
 import "./css/fontello.css";
 import Game from "./gameComponents/Game";
 import beepMP3 from "./sounds/beep.mp3";
+
 import { Dimensions } from "./types";
 
 let onMobile: boolean = window.innerWidth < 480 ? true : false;
@@ -24,6 +25,7 @@ let gameAreaDimensions: Dimensions = {
 let ctx: CanvasRenderingContext2D = gameArea.getContext("2d");
 
 let beep = new Audio(beepMP3);
+beep.volume=0.1;
 
 let game: Game = new Game(gameArea, ctx);
 

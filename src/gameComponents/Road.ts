@@ -12,7 +12,7 @@ export default class Road {
         this.ctx = ctx;
 
         let roadWidth = onMobile ? gameAreaDimensions.width / 1.2 : gameAreaDimensions.width / 2;
-        let roadPosX = (gameAreaDimensions.width-roadWidth)/2; // to align road in screen center - na ji naa this not center
+        let roadPosX = (gameAreaDimensions.width - roadWidth) / 2; // to align road in screen center - na ji naa this not center
 
         this.dimensions = {
             height: gameAreaDimensions.height,
@@ -31,6 +31,14 @@ export default class Road {
                 };
             }
         );
+
+        this.stripes.unshift({
+            // one stripe is added off the screen so that it looks continuos when comes in view
+            height: gameAreaDimensions.height / (this.stripeCount + 1),
+            width: 10,
+            posX: roadPosX + roadWidth / 2 - 10 / 2,
+            posY: -1 * (gameAreaDimensions.height / this.stripeCount),
+        });
     }
 
     public getDimensions(): Dimensions {
@@ -59,7 +67,7 @@ export default class Road {
         let rh = this.dimensions.height; // roadHeight
         this.stripes.forEach((i) => {
             if (i.posY > rh - rh / Math.pow(this.stripeCount, 2)) {
-                i.posY = -(rh - i.posY);
+                i.posY = -1 * (gameAreaDimensions.height / this.stripeCount) - (rh - i.posY);
             } else {
                 i.posY += constants.CAR_SPEED;
             }

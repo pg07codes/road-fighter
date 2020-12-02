@@ -26,6 +26,7 @@ export default class Game {
         this.isGameInitialized = false;
         this.isRunning = false;
         this.carCrashAudio = new Audio(carCrashMP3);
+        this.carCrashAudio.volume=0.5;
         this.grassSprite = new Image();
         this.grassSprite.src = grassSpritePNG;
     }

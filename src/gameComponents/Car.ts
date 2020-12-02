@@ -29,6 +29,7 @@ export default class Car {
         this.carImage = new Image();
         this.carImage.src = carPNG;
         this.carOnEdgeAudio = new Audio(carOnEdgeMP3);
+        this.carOnEdgeAudio.volume=0.5;
 
         this.initialize();
     }
