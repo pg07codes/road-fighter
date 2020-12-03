@@ -17,39 +17,110 @@ body {
 
 #instructions {
     color: white;
-    display:none;
+    display: none;
+    font-size: 0.7rem;
     width: 600px;
     margin: 10px auto;
     text-align: center;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#instructions strong{
+    font-size: 1rem;
+}
+
 #mobileController {
     user-select: none;
-    display:none;
+    display: none;
     margin: 2px;
     text-align: center;
     flex-flow: row nowrap;
 }
 
-#mobileController div{
+#mobileController div {
     display: inline-block;
     margin: 1px;
 }
 
-#leftSteer , #rightSteer , #playpause{
+#leftSteer,
+#rightSteer,
+#playpause {
     font-size: 1.2rem;
     color: white;
 }
 
-#playpause{
+#playpause {
     background-color: green;
     border-radius: 50%;
-    padding: 3px;
+    padding: 5px;
 }
 
-#leftSteer , #rightSteer{
+#leftSteer,
+#rightSteer {
     flex-grow: 1;
     background-color: #464647;
-    border-radius:8px ;
+    border-radius: 8px;
+    padding:3px;
+}
+#loader-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+    z-index: 9999;
+}
+#loader {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    position: fixed;
+    top: 45%;
+    left: 45%;
+}
+#spinner {
+    border: 10px solid red;
+    border-top: 10px solid greenyellow;
+    border-right: 10px solid blue;
+    border-bottom: 10px solid yellow;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#score-div{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: aliceblue;
+}
+
+#score{
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
 }

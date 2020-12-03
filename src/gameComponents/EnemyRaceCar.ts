@@ -1,7 +1,7 @@
 import constants from "../constants";
 import { Dimensions } from "../types";
 import IEnemyVehicle from "./IEnemyVehicle";
-import enemyRaceCarPNG from "./../images/enemyRaceCar.png";
+import { enemyRaceCarImg } from "./../index";
 
 export default class EnemyRaceCar implements IEnemyVehicle {
     // public fields to be used in EnemyVehicleManager
@@ -18,8 +18,7 @@ export default class EnemyRaceCar implements IEnemyVehicle {
         };
 
         this.speed = speed;
-        this.img = new Image();
-        this.img.src = enemyRaceCarPNG;
+        this.img = enemyRaceCarImg;
     }
 
     private static getCarLocationBasedEnemyRaceCarPosition(rd:Dimensions,cd:Dimensions):number{

@@ -1,9 +1,8 @@
 import { Dimensions } from "../types";
 import { ctx } from "./../index";
-import carPNG from "./../images/car.png";
 import carOnEdgeMP3 from "./../sounds/carOnEdge.mp3";
 import constants from "../constants";
-import { onMobile } from "./../index";
+import { onMobile , carImg } from "./../index";
 
 export default class Car {
     private ctx;
@@ -26,8 +25,7 @@ export default class Car {
         this.maxSteerSpeed = maxSteerSpeed;
         this.steerSpeed = 0;
 
-        this.carImage = new Image();
-        this.carImage.src = carPNG;
+        this.carImage = carImg;
         this.carOnEdgeAudio = new Audio(carOnEdgeMP3);
         this.carOnEdgeAudio.volume=0.5;
 

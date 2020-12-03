@@ -19,7 +19,7 @@
 [Clicking here](https://roadfighter.netlify.com) you can play enjoy :D
 
 # What is it?
-Its an implementation of classic road fighter NES game with HTML5 Canvas and Typescript.
+Its an implementation of classic road fighter NES game with HTML5 Canvas and Typescript. Completely responsive and thus can be played on any device. For mobile devices, it uses on-screen buttons to control game and for laptop/pc, it uses keyboard buttons.
 
 # How to setup locally and run project
 

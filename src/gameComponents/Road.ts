@@ -12,7 +12,7 @@ export default class Road {
         this.ctx = ctx;
 
         let roadWidth = onMobile ? gameAreaDimensions.width / 1.2 : gameAreaDimensions.width / 2;
-        let roadPosX = (gameAreaDimensions.width - roadWidth) / 2; // to align road in screen center - na ji naa this not center
+        let roadPosX = (gameAreaDimensions.width - roadWidth) / 2;
 
         this.dimensions = {
             height: gameAreaDimensions.height,

@@ -15,6 +15,7 @@ export default class Game {
     private enemyVehicleManager: EnemyVehicleManager;
     private carCrashAudio;
     private grassSprite;
+    private gameStartTime: number;
 
     public isGameInitialized: boolean;
     public isRunning: boolean;
@@ -26,7 +27,7 @@ export default class Game {
         this.isGameInitialized = false;
         this.isRunning = false;
         this.carCrashAudio = new Audio(carCrashMP3);
-        this.carCrashAudio.volume=0.5;
+        this.carCrashAudio.volume = 0.5;
         this.grassSprite = new Image();
         this.grassSprite.src = grassSpritePNG;
     }
@@ -37,11 +38,16 @@ export default class Game {
         this.car = new Car(constants.MAX_STEER_SPEED, this.road.getDimensions());
         this.enemyVehicleManager = new EnemyVehicleManager(this.road.getDimensions(), this.car);
 
+        this.gameStartTime = Date.now();
+
         // creating background from grass sprites
         let pattern = this.ctx.createPattern(this.grassSprite, "repeat");
         this.ctx.rect(0, 0, this.gameArea.width, this.gameArea.height);
         this.ctx.fillStyle = pattern;
         this.ctx.fill();
+
+        // setting score div to be hidden by default
+        document.getElementById("score-div").style.display = "none";
     }
 
     private gameLoop(currentTime: DOMHighResTimeStamp): void {
@@ -64,11 +70,24 @@ export default class Game {
             this.carCrashAudio.play();
             this.isGameInitialized = false;
             this.isRunning = false;
+            this.displayScore();
         }
 
         if (this.isRunning) {
             requestAnimationFrame(this.gameLoop.bind(this));
         }
+    }
+
+    private displayScore(): void {
+        
+        let score = Math.floor((Date.now() - this.gameStartTime) / 10);
+        
+        document.getElementById("score-div").style.display = "block";
+        document.getElementById("score").innerHTML = `
+        <div style="margin-top:50px">
+            <span><em>Crashed! Final Score is </em><b>${score}</b>.</span>
+        </div>
+        `;
     }
 
     public run(): void {
