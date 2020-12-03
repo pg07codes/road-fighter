@@ -82,9 +82,9 @@ export default class Game {
         
         let score = Math.floor((Date.now() - this.gameStartTime) / 10);
         
-        document.getElementById("score-div").style.display = "block";
+        document.getElementById("score-div").style.display = "flex";
         document.getElementById("score").innerHTML = `
-        <div style="margin-top:50px">
+        <div style="margin-top:10px">
             <span><em>Crashed! Final Score is </em><b>${score}</b>.</span>
         </div>
         `;

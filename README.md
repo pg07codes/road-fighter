@@ -4,6 +4,7 @@
 <p align="center">
 <img src="https://user-images.githubusercontent.com/34238240/100523809-52198300-31d9-11eb-9b39-e0a401cc1884.png" alt="Game Screenshot">
 <img src="https://user-images.githubusercontent.com/34238240/100523811-547bdd00-31d9-11eb-83da-5ecffeb09265.png" alt="Mobile Game Screenshot">
+<img src="https://user-images.githubusercontent.com/34238240/100996755-741b5880-357f-11eb-9c5c-70123c46a1a0.png" alt="Mobile Game Over">
 </p>
 
 <p align="center">Implementation of NES Road Fighter game every 90's person has played in their childhood. Written in Typescript</p>
@@ -20,6 +21,18 @@
 
 # What is it?
 Its an implementation of classic road fighter NES game with HTML5 Canvas and Typescript. Completely responsive and thus can be played on any device. For mobile devices, it uses on-screen buttons to control game and for laptop/pc, it uses keyboard buttons.
+
+### Todo List
+
+- [x] make it responsive
+- [x] add buttons on mobile device for mobile playability
+- [x] insert enemy car based on current location (not randomly)
+- [x] add more types (trucks or something)
+- [x] make a scoring logic and show score on gameover
+- [x] auto reload and resize game area if viewport height/width changes
+- [x] add loader screen for before the gameloads
+- [ ] add more levels
+- [ ] surrounding scenery can be improved for more immersive environment
 
 # How to setup locally and run project
 
@@ -53,14 +66,6 @@ npm run dev
 ```
 npm run build
 ```
-## Todos
-
-- [x] make it responsive
-- [x] add buttons on mobile device for mobile playability
-- [x] insert enemy car based on current location (not randomly)
-- [x] add more types (trucks or something)
-- [ ] add more levels
-- [ ] make a scoring logic and show score on gameover
 
 <br>
 

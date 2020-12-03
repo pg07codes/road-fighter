@@ -29,7 +29,7 @@ let carImg: HTMLImageElement, enemyCarImg: HTMLImageElement, enemyTruckImg: HTML
 (function loadingBanner() {
     setTimeout(() => {
         document.getElementById("loader-div").style.display = "none";
-    }, 1000);
+    }, 770);
 })();
 
 (function onWindowResize() {
